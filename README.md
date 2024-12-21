@@ -58,10 +58,7 @@ By Hok Yin Wong
   ## 2.Arithmetic Operations
   
   
-
 1. Addition (`+` and `+=`)
-   
-   Firstly, two `bigint` objects compare their sign `is_negative`.
 
    If two `bigint` objects have the same sign, the result's magnitude must be the sum of two object's magnitude. Pass the value of `is_negative` to the result.
 
@@ -90,6 +87,7 @@ By Hok Yin Wong
 
 
 3. Subtraction (`-` and `-=`)
+   If two `bigint` objects have the same sign, the result's magnitude must be the difference of two object's magnitude. The sign of result depends on the sign of the object with larger magnitude. The `is_negative` of the object with larger magnitude passed to the `is_negative` of the result.
    
      ```cpp
       bigint a(1000);
@@ -214,6 +212,12 @@ By Hok Yin Wong
       The value of x++ is: 101
       The value of x++ is: 102
       ```
+## 5. Member Functions
+   `is_larger(const bigint &var1, const bigint &var2)` compare the magnitude of var1 and var2. It returns true if var1 is greater than of equal to var2.
+   `addition` 
+    `subtraction`
+    `multiplication`
+    `str_to_int`
     
     
       
