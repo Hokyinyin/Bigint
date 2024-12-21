@@ -1,12 +1,17 @@
 #include "bigint.hpp"
 #include <iostream>
 
+/**
+ * @brief test program for bigint
+ * Definee three variables a,b,c. c is to confirm the program can catch the error
+ * @return int
+ */
 int main()
 {
     // Define variables for the test. We can modify them to test the program.
     int64_t a = 100;
     std::string b = "100000000000";
-    std::string c = "100000000000";
+    std::string c = "afe343421";
 
     try
     {
@@ -28,15 +33,14 @@ int main()
         std::cout << "The value of the input variable: " << b << "\n";
         std::cout << "The value of the constructed bigint variable: " << D << "\n";
         std::cout << "\n";
-        bigint E(c); // For the use of consistent test
 
         // Test the aritmatic operator
-        std::cout << C << " + " << D << " = " << (C + D) << "\n"; // Addition
-        std::cout << C << " - " << D << " = " << (C - D) << "\n"; // Subtraction
-        std::cout << C << " * " << D << " = " << (C * D) << "\n"; // Multiplication
-        // std::cout << C << " -= " << D << " = " << (C -= D) << "\n"; // Subtraction
-        // std::cout << C << " *= " << D << " = " << (C *= D) << "\n"; // Multiplication
-        // std::cout << C << " += " << D << " = " << (C += D) << "\n"; // Addition
+        std::cout << C << " + " << D << " = " << (C + D) << "\n";   // Addition
+        std::cout << C << " - " << D << " = " << (C - D) << "\n";   // Subtraction
+        std::cout << C << " * " << D << " = " << (C * D) << "\n";   // Multiplication
+        std::cout << C << " -= " << D << " = " << (C -= D) << "\n"; // Subtraction
+        std::cout << C << " *= " << D << " = " << (C *= D) << "\n"; // Multiplication
+        std::cout << C << " += " << D << " = " << (C += D) << "\n"; // Addition
         std::cout << "\n";
 
         // Test the comparison operator
@@ -58,10 +62,11 @@ int main()
         std::cout << "After the post-decrement: " << C << "\n";
         std::cout << "\n";
 
-        // Consistent test
-        std::cout << "(" << C << " + " << D << " + " << E << " = " << (C + D + E) << ")" << "\n"; // Addition
-        std::cout << "(" << C << " - " << D << " - " << E << " = " << (C - D - E) << ")" << "\n"; // Subtraction
-        std::cout << "(" << C << " * " << D << " * " << E << " = " << (C * D * E) << ")" << "\n"; // Multiplication
+        /**
+         * @brief Define c to test if the program can catch the error. c is a invalid input.
+         *
+         */
+        bigint E(c);
     }
     catch (const std::invalid_argument &e)
     {

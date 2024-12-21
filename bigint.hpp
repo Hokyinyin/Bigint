@@ -40,8 +40,7 @@ public:
     bigint();                              // default constructor
     bigint(const int64_t num);             // constructor taking 64bit unsigned integer
     bigint(const std::string &str_digits); // constructor taking a string of digits
-    // member functions
-    friend void print(const bigint &var);
+
     // friend functions
     friend bool is_larger(const bigint &var1, const bigint &var2);
     friend bigint addition(const bigint &x, const bigint &y);
@@ -49,6 +48,7 @@ public:
     friend std::ostream &operator<<(std::ostream &out, const bigint &var);
     friend bigint multiplication(const bigint &x, const bigint &y);
     friend uint32_t str_to_int(const std::string str);
+
     // arithmatic operator
     bigint &operator+=(const bigint &var);
     bigint operator+(const bigint &var);
@@ -56,6 +56,7 @@ public:
     bigint operator-(const bigint &var);
     bigint &operator*=(const bigint &var);
     bigint operator*(const bigint &var);
+
     // comparison operator
     bool operator==(const bigint &var);
     bool operator!=(const bigint &var);
@@ -76,11 +77,6 @@ public:
  *
  * @param var
  */
-void print(const bigint &var)
-{
-    for (uint64_t i = 0; i < var.API.size(); i++)
-        std::cout << "The " << i << "element" << "in the API" << var.API[i] << "\n";
-}
 
 uint32_t str_to_int(const std::string str)
 {
