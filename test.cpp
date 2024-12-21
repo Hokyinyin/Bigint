@@ -4,9 +4,9 @@
 int main()
 {
     // Define variables for the test. We can modify them to test the program.
-    int64_t a = 2340;
-    std::string b = "-51210";
-    std::string c = "100";
+    int64_t a = 100;
+    std::string b = "100000000000";
+    std::string c = "100000000000";
 
     try
     {
@@ -31,12 +31,12 @@ int main()
         bigint E(c); // For the use of consistent test
 
         // Test the aritmatic operator
-        std::cout << "(" << C << " + " << D << " = " << (C + D) << ")" << "\n";   // Addition
-        std::cout << "(" << C << " - " << D << " = " << (C - D) << ")" << "\n";   // Subtraction
-        std::cout << "(" << C << " * " << D << " = " << (C * D) << ")" << "\n";   // Multiplication
-        std::cout << "(" << C << " += " << D << " = " << (C += D) << ")" << "\n"; // Addition
-        std::cout << "(" << C << " -= " << D << " = " << (C -= D) << ")" << "\n"; // Subtraction
-        std::cout << "(" << C << " *= " << D << " = " << (C *= D) << ")" << "\n"; // Multiplication
+        std::cout << C << " + " << D << " = " << (C + D) << "\n"; // Addition
+        std::cout << C << " - " << D << " = " << (C - D) << "\n"; // Subtraction
+        std::cout << C << " * " << D << " = " << (C * D) << "\n"; // Multiplication
+        // std::cout << C << " -= " << D << " = " << (C -= D) << "\n"; // Subtraction
+        // std::cout << C << " *= " << D << " = " << (C *= D) << "\n"; // Multiplication
+        // std::cout << C << " += " << D << " = " << (C += D) << "\n"; // Addition
         std::cout << "\n";
 
         // Test the comparison operator

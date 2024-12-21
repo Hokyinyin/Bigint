@@ -1,14 +1,40 @@
+/**
+ * @file bigint.hpp
+ * @author Hok Yin Wong (wongh76@mcmaster.ca)
+ * @brief bigint: a class that store and operate arbitrary-precision integers to perform scientific calculation.
+ * @version 0.1
+ * @date 2024-12-20
+ *
+ * @copyright Copyright (c) 2024
+ *
+ */
 #include <iostream>
 #include <vector>
 #include <string>
 #include <iomanip>
 
+/**
+ * @brief define bigint class.
+ *
+ *
+ */
 class bigint
 {
+
+    /**
+     * @brief Two private members: API and is_negative
+     * API is the short term of arbitary precision integer
+     * API is a vector of 32 bits unsigned integer. The element is the four digits extracted from the number.
+     * is_negative is the sign of the integer. When the integer is positve, is_negative is false. Vice versa.
+     */
 private:
-    std::vector<uint32_t> API; // arbitary precision integer API
+    std::vector<uint32_t> API;
     bool is_negative = false;
 
+    /**
+     * @brief
+     *
+     */
 public:
     // constructor
     bigint();                              // default constructor
@@ -45,10 +71,15 @@ public:
     bigint operator--(int);
 };
 
+/**
+ * @brief
+ *
+ * @param var
+ */
 void print(const bigint &var)
 {
-    for (int64_t i = 0; i < var.API.size(); i++)
-        std::cout << "Inside the API" << var.API[i] << "\n";
+    for (uint64_t i = 0; i < var.API.size(); i++)
+        std::cout << "The " << i << "element" << "in the API" << var.API[i] << "\n";
 }
 
 uint32_t str_to_int(const std::string str)
@@ -57,7 +88,7 @@ uint32_t str_to_int(const std::string str)
     uint32_t sum = 0;
     while (i < str.size())
     {
-        sum = (str[i] - '0') + sum * 10;
+        sum = static_cast<uint32_t>(str[i] - '0') + sum * 10;
         i++;
     }
     return sum;
@@ -79,11 +110,9 @@ bigint::bigint(int64_t num)
         num = -num;
         is_negative = true;
     }
-    // std::string str = std::to_string(num);
-    // *this = bigint(str);
     while (num > 0)
     {
-        API.push_back(num % 10000);
+        API.push_back(static_cast<uint32_t>(num % 10000));
         num = num / 10000;
     }
     if (API.empty())
@@ -109,7 +138,7 @@ bigint::bigint(const std::string &str_digits)
         if (!isdigit(str_digits[i]))
             throw std::invalid_argument("Failed because the input contains non-integer character.");
     std::string str_4digits = "";
-    for (int64_t i = (str_digits.size() - 1); i >= index_start; i -= 4)
+    for (int64_t i = (static_cast<int64_t>(str_digits.size()) - 1); i >= index_start; i -= 4)
     {
         int64_t j = i - 3;
         if (j < 0 && index_start == 0)
@@ -118,11 +147,9 @@ bigint::bigint(const std::string &str_digits)
             j = 1;
         while (j <= i)
         {
-            // std::cout << j << "\n";
-            str_4digits.push_back(str_digits[j]);
+            str_4digits.push_back((str_digits[static_cast<uint64_t>(j)]));
             j++;
         }
-        // std::cout << "str that store in vector: " << str << std::endl;
         API.push_back(str_to_int(str_4digits));
         str_4digits.clear();
     }
@@ -147,10 +174,6 @@ std::ostream &operator<<(std::ostream &out, const bigint &var)
 
 bool is_larger(const bigint &x, const bigint &y) // return true if x is larger or equal to var2
 {
-    // std::cout << "x1" << x.API[1] << std::endl;
-    // std::cout << "x2" << x.API[0] << std::endl;
-    // std::cout << "y1" << y.API[1] << std::endl;
-    // std::cout << "y2" << y.API[0] << std::endl;
     if (x.API.size() != y.API.size())
     {
         if (x.API.size() > y.API.size())
@@ -182,12 +205,10 @@ bigint addition(const bigint &x, const bigint &y)
         if (i < x.API.size())
         {
             sum += x.API[i];
-            // std::cout << sum << "\n";
         }
         if (i < y.API.size())
         {
             sum += y.API[i];
-            // std::cout << sum << "\n";s
         }
         result.API[i] = sum % 10000;
         sum = sum / 10000;
@@ -214,13 +235,13 @@ bigint subtraction(const bigint &x, const bigint &y)
             sum -= y.API[i];
         if (sum >= 0)
         {
-            result.API[i] = sum % 10000;
+            result.API[i] = static_cast<uint32_t>(sum % 10000);
             sum = sum / 10000;
         }
         else
         {
             sum += 10000;
-            result.API[i] = sum % 10000;
+            result.API[i] = static_cast<uint32_t>(sum % 10000);
             sum = -1;
         }
     }
@@ -231,12 +252,10 @@ bigint subtraction(const bigint &x, const bigint &y)
 
 bigint multiplication(const bigint &x, const bigint &y)
 {
-    // std::cout << x.API.size() + y.API.size() << "\n";
     bigint result;
     result.API.clear();
     for (uint64_t i = 0; i < (x.API.size() + y.API.size()); i++)
         result.API.push_back(0);
-    // std::cout << result.API.size() << "\n";
 
     uint64_t sum = 0;
     for (uint64_t i = 0; i < x.API.size(); i++)
@@ -309,15 +328,10 @@ bigint bigint::operator-(const bigint &var)
 bigint &bigint::operator*=(const bigint &var)
 {
     bool temp;
-    // if (*this == 0 or bigint(0) == var)
-    // {
-    //     is_negative = false;
-    //     return *this;
-    // }
     if (is_negative != var.is_negative)
         temp = true;
     else
-        temp = is_negative;
+        temp = false;
     *this = multiplication(*this, var);
     is_negative = temp;
 
