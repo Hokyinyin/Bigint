@@ -214,10 +214,14 @@ By Hok Yin Wong
       ```
 ## 5. Member Functions
    `is_larger(const bigint &var1, const bigint &var2)` compare the magnitude of var1 and var2. It returns true if var1 is greater than of equal to var2.
-   `addition` 
-    `subtraction`
-    `multiplication`
-    `str_to_int`
+   
+   `addition` return the `bigint` object with the sum of the two varible's magnitude
+   
+   `subtraction` return the `bigint` object with the difference of the two varible's magnitude
+   
+   `multiplication` return the `bigint` object with the product of the two varible's magnitude
+   
+   `str_to_int` take the string input and return the uint32_t.
     
     
       
